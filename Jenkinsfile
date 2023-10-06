@@ -13,9 +13,7 @@ pipeline {
           }
           steps{
             echo 'Compiling vote app'
-            dir('vote'){
-              sh 'pip install -r requirements.txt'
-            }
+            sh 'pip install -r requirements.txt'
           }
 
       }
@@ -28,10 +26,8 @@ pipeline {
           }
           steps{
             echo 'Running Unit Tests on vote app'
-            dir('vote'){
-              sh 'pip install -r requirements.txt'
-              sh 'nosetests -v'
-            }
+            sh 'pip install -r requirements.txt'
+            sh 'nosetests -v'
           }
       }
       stage('Docker BnP'){
