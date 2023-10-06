@@ -7,7 +7,7 @@ pipeline {
       stage('Build'){
           agent{
             docker{
-              image 'python:2.7.16-slim'
+              image 'python:alpine3.17'
               args '--user root'
             }
           }
@@ -22,7 +22,7 @@ pipeline {
       stage('Unit Test'){
           agent{
             docker{
-              image 'python:2.7.16-slim'
+              image 'python:alpine3.17'
               args '--user root'
             }
           }
@@ -43,7 +43,7 @@ pipeline {
             echo 'Packaging vote app with docker'
             script{
               docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
-                  def voteImage = docker.build("xxxxxx/vote:v-jen-${env.BUILD_ID}", "./vote")
+                  def voteImage = docker.build("xxxxxx/vote:v${env.BUILD_ID}", "./vote")
                   voteImage.push()
                   voteImage.push("dev")
               }
